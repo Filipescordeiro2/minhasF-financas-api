@@ -3,5 +3,5 @@ package com.BaberShop.BaberShop.Enums;
 public enum StatusLancamento {
     PENDENTE,
     CANCELADO,
-    EFETIADO
+    EFETIVADO
 }

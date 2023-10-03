@@ -3,7 +3,10 @@ package com.BaberShop.BaberShop.model;
 import com.BaberShop.BaberShop.Enums.StatusLancamento;
 import com.BaberShop.BaberShop.Enums.TipoLancamento;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import java.math.BigDecimal;
@@ -12,6 +15,9 @@ import java.time.LocalDate;
 @Entity
 @Table(name="lancamento")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Lancamento {
 
     @Id
@@ -19,7 +25,7 @@ public class Lancamento {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "decricao")
+    @Column(name = "descricao")
     private String descricao;
 
     @Column(name = "mes")

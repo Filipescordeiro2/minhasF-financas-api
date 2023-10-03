@@ -8,20 +8,11 @@ import java.util.Objects;
 
 @Entity
 @Table (name="usuario")
+@Data
 @Builder
-@Getter
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Usuario {
-
-    public Usuario() {
-    }
-
-    public Usuario(Long id, String nome, String email, String senha) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-    }
 
     @Id
     @Column(name ="id")

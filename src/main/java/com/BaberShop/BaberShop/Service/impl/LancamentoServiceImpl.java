@@ -1,6 +1,7 @@
 package com.BaberShop.BaberShop.Service.impl;
 
 import com.BaberShop.BaberShop.Enums.StatusLancamento;
+import com.BaberShop.BaberShop.Enums.TipoLancamento;
 import com.BaberShop.BaberShop.Repository.LancamentoRepository;
 import com.BaberShop.BaberShop.Service.LancamentoService;
 import com.BaberShop.BaberShop.exception.RegraNegocioException;
@@ -15,6 +16,7 @@ import java.lang.annotation.Target;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class LancamentoServiceImpl implements LancamentoService  {
@@ -78,5 +80,25 @@ public class LancamentoServiceImpl implements LancamentoService  {
         if (lancamento.getTipo()==null){
             throw new RegraNegocioException("Informe um tipo de lancamento");
         }
+    }
+
+    @Override
+    public Optional<Lancamento> obterPorId(Long id) {
+        return repository.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public BigDecimal obterSaldoPorUsuario(Long id) {
+     BigDecimal receitas =repository.obterSaldoPorTipoLancamentoEUsuario(id, TipoLancamento.RECEITA);
+        BigDecimal despesas=repository.obterSaldoPorTipoLancamentoEUsuario(id,TipoLancamento.DESPESA);
+
+        if (receitas==null){
+            receitas=BigDecimal.ZERO;
+        }
+        if (despesas==null){
+            despesas=BigDecimal.ZERO;
+        }
+        return receitas.subtract(despesas);
     }
 }
