@@ -23,7 +23,8 @@ public class UsuarioController {
 private UsuarioService service;
 @Autowired
 private LancamentoService lancamentoService;
-    @PostMapping("/autenticar")
+  
+@PostMapping("/autenticar")
     public ResponseEntity autenticar(@RequestBody UsuarioDTO dto){
 try {
    Usuario usuarioAuteticado = service.autenticar(dto.getEmail(), dto.getSenha());
@@ -47,6 +48,7 @@ try {
 }catch (RegraNegocioException e){
     return ResponseEntity.badRequest().body(e.getMessage());
 }
+
     }
     @GetMapping("{id}/saldo")
     public ResponseEntity obterSaldo(@PathVariable ("id")Long id){
